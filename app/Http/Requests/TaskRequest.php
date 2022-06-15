@@ -27,7 +27,7 @@ class TaskRequest extends FormRequest
             return [
                 'name'          => 'required|string|min:3|max:255',
                 'description'   => 'string',
-                'status'        => 'required|string|min:3',
+                'status'        => 'required|string|min:3|max:25|in:backlog,in_progress,waiting_customer_approval,approved',
                 'file_url'      => 'required|string'
             ];
         }
@@ -36,9 +36,24 @@ class TaskRequest extends FormRequest
             return [
                 'name'          => 'string|min:3|max:255',
                 'description'   => 'string',
-                'status'        => 'string|min:3',
+                'status'        => 'string|min:3|max:25|in:backlog,in_progress,waiting_customer_approval,approved',
                 'file_url'      => 'string'
             ];
         }
     }
+
+    // adicionar tratamento para remover os espaços em branco
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages()
+    {
+        return [
+            'status.in'             => 'O status deve ser um dos seguintes: backlog, in_progress, waiting_customer_approval, approved'
+        ];
+    }
+        
 }

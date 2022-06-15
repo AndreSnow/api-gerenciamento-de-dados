@@ -9,6 +9,8 @@ class TagsTask extends Model
 {
     use HasFactory;
 
+    protected $table = 'tags_tasks';
+
     protected $fillable = [
         'id',
         'tag_name',

@@ -2,31 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagRequest;
 use App\Http\Requests\TaskRequest;
+use App\Http\Traits\StatusTrait;
+use App\Models\TagsTask;
 use App\Models\Task;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 
 class TaskController extends Controller
 {
+    use StatusTrait;
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of tasks.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data = Task::all();
-        if ($data->isEmpty()) {
+        $tasks = Task::all([
+            'id', 'name', 'description', 'status'
+        ]);
+
+        if ($tasks->isEmpty()) {
             return response()->json([
-                'message' => 'Nenhum registro encontrado',
+                'error' => 'Nenhuma tarefa encontrada'
             ], 404);
         }
 
-        return response()->json($data);
+        foreach ($tasks as $task) {
+            $task->tags = TagsTask::where('task_id', $task->id)
+                ->get(['tag_name']);
+        }
+
+        return response()->json($tasks, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of approved tasks.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listApproved($request)
+    {
+        $tasks = Task::all()->where('id', $request)
+            ->where('status', 'approved');
+
+        if ($tasks->isEmpty()) {
+            return response()->json([
+                'error' => 'Nenhuma tarefa encontrada'
+            ], 404);
+        }
+
+        return response()->json($tasks, 200);
+    }
+
+    /**
+     * Store a newly created resource in tarefas.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -36,19 +68,49 @@ class TaskController extends Controller
         $data = $request->only([
             'name', 'description', 'status', 'file_url'
         ]);
+
+        if (!isset($data['status'])) {
+            $data['status'] = 'backlog';
+        }
+
         $task = Task::create($data);
 
         if (!$task) {
             return response()->json([
                 'error' => 'Erro ao criar a tarefa'
-            ], 400);
+            ], 422);
         }
 
         return response()->json($task, 201);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in tag.
+     * @param  int  $id
+     */
+    public function storeTag(TagRequest $request)
+    {
+        $data = $request->only([
+            'tag_name', 'task_id'
+        ]);
+
+        if (!Task::find($data['task_id'])) {
+            return response()->json([
+                'error' => 'Tarefa não encontrada'
+            ], 404);
+        }
+        $tag = TagsTask::create($data);
+        if (!$tag) {
+            return response()->json([
+                'error' => 'Erro ao criar a tag'
+            ], 422);
+        }
+
+        return response()->json('', 204);
+    }
+
+    /**
+     * Update the specified task.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -56,19 +118,23 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, $id)
     {
+        if ($request->has('status')) {
+            $task = $this->getStatusAttribute($request, $id);
+            return $task;
+        }
+
         $task = Task::findOrFail($id);
         $data = $request->only([
             'name', 'description', 'status', 'file_url'
         ]);
 
-        if ($task->update($data)) {
-            return response()->json($task, 200);
-        }
-        return response()->json(['error' => 'Erro ao atualizar'], 400);
+        $task->update($data);
+
+        return response()->json('', 204);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the status.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -76,33 +142,18 @@ class TaskController extends Controller
      */
     public function patch(TaskRequest $request, $id)
     {
-        $task = Task::findOrFail($id);
-        $data = $request->only([
-            'status'
-        ]);
-
-        // O status apenas pode ser alterado respeitando os estágios da tarefa:
-        // BACKLOG -> IN_PROGRESS -> IN_PROGRESS -> WAITING_CUSTOMER_APPROVAL -> WAITING_CUSTOMER_APPROVAL -> APPROVED
-        if ($task->status == 'BACKLOG' && $data['status'] == 'IN_PROGRESS') {
-            $task->update($data);
-            return response()->json($task, 200);
+        if (!$request->has('status')) {
+            return response()->json([
+                'error' => 'Status não informado'
+            ], 422);
         }
+        $task = $this->getStatusAttribute($request, $id);
 
-        if ($task->status == 'IN_PROGRESS' && $data['status'] == 'WAITING_CUSTOMER_APPROVAL') {
-            $task->update($data);
-            return response()->json($task, 200);
-        }
-
-        if ($task->status == 'WAITING_CUSTOMER_APPROVAL' && $data['status'] == 'APPROVED') {
-            $task->update($data);
-            return response()->json($task, 200);
-        }
-
-        return response()->json(['error' => 'Erro ao atualizar'], 400);
+        return $task;
     }
 
     /**
-     * destroy
+     * delete the specified task
      *
      * @param  mixed $id
      * @return void
