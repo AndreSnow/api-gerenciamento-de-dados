@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "e154d479-11de-4cdd-834e-2644963096f8",
+		"name": "API GDT",
+		"description": "Desenvolvido como teste para a vaga na empresa Mandarin\n\nFunciona como um gerenciador de tarefas e foi desenvolvido com\n\nLaravel 9\n\nPHP 8\n\nTestes foram realizados em Sqlite e MySQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14026033"
+	},
+	"item": [
+		{
+			"name": "task",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{local}}api/tasks",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Retorna lista de todas as tarefas e suas repectivas tags\n\n###### StatusCode: 200"
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}api/tasks",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 21:33:58 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 21:33:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "54"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Prof. London McGlynn Jr.\",\n        \"description\": \"Suscipit est dolorem libero officia autem numquam. Et unde itaque omnis. Reiciendis vel laudantium ut tenetur aut commodi.\",\n        \"status\": \"in_progress\",\n        \"tags\": [\n            {\n                \"tag_name\": \"Adelle Hirthe\"\n            },\n            {\n                \"tag_name\": \"It was popularised in the 1960s\"\n            },\n            {\n                \"tag_name\": \"It was popularised in the 1960s\"\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Mrs. Adela Jones MD\",\n        \"description\": \"Aliquam velit fugit vero nulla. Quo modi sed tenetur accusantium et. Rem aut qui dolorem ut similique voluptate non assumenda.\",\n        \"status\": \"in_progress\",\n        \"tags\": []\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Derick Block DDS\",\n        \"description\": \"Aperiam aut natus aut aspernatur sunt perferendis et. Error commodi quis ipsa sunt. Hic aut sit quisquam eum totam est.\",\n        \"status\": \"approved\",\n        \"tags\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Dr. Chanel Gutkowski\",\n        \"description\": \"Nihil est et praesentium illum omnis. Non recusandae maxime soluta. Vitae quam sequi ea natus architecto facere et velit. Ducimus ut et vel praesentium.\",\n        \"status\": \"waiting_customer_approval\",\n        \"tags\": []\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Wilton Rath V\",\n        \"description\": \"Voluptatem rem quia et repellendus voluptatem. Nihil quasi iure neque reiciendis debitis sapiente rem. Quis pariatur modi tempora occaecati. Facilis quisquam est quod omnis quis tempore.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Kurtis Paucek\",\n        \"description\": \"Officia dolorem sint excepturi aperiam. Ad ut dolores dolor. Dolor sit et optio nostrum delectus.\",\n        \"status\": \"waiting_customer_approval\",\n        \"tags\": [\n            {\n                \"tag_name\": \"Ward Jacobson\"\n            },\n            {\n                \"tag_name\": \"Donald Emard\"\n            },\n            {\n                \"tag_name\": \"Prof. Marie Lynch\"\n            },\n            {\n                \"tag_name\": \"Kara Rolfson Sr.\"\n            }\n        ]\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Estrella Bergnaum Jr.\",\n        \"description\": \"In laboriosam et numquam voluptas quasi sed minus velit. Et molestiae ipsa corrupti eum quo occaecati placeat. Exercitationem odit ut perspiciatis. Vel ad tempore exercitationem.\",\n        \"status\": \"waiting_customer_approval\",\n        \"tags\": []\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Wellington Thompson\",\n        \"description\": \"Provident et deleniti enim. Et nobis tempore voluptatem voluptas consectetur. Accusantium neque inventore provident aut qui non.\",\n        \"status\": \"approved\",\n        \"tags\": [\n            {\n                \"tag_name\": \"Chet Kris\"\n            }\n        ]\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Allan Monahan PhD\",\n        \"description\": \"Neque est omnis nisi. Ut fugit et ut nulla sed sequi commodi.\",\n        \"status\": \"approved\",\n        \"tags\": [\n            {\n                \"tag_name\": \"Prof. Cade Trantow\"\n            },\n            {\n                \"tag_name\": \"Leonora Ratke\"\n            }\n        ]\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Zack Runte\",\n        \"description\": \"Tenetur magnam quae officiis eos. Ipsam non ut qui sequi assumenda eos.\",\n        \"status\": \"in_progress\",\n        \"tags\": []\n    },\n    {\n        \"id\": 13,\n        \"name\": \"primeiro test 2\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"approved\",\n        \"tags\": [\n            {\n                \"tag_name\": \"It was popularised in the 1960s\"\n            },\n            {\n                \"tag_name\": \"It was popularised in the 1960s\"\n            }\n        ]\n    },\n    {\n        \"id\": 14,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"approved\",\n        \"tags\": []\n    },\n    {\n        \"id\": 15,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    },\n    {\n        \"id\": 16,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    },\n    {\n        \"id\": 17,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    },\n    {\n        \"id\": 18,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    },\n    {\n        \"id\": 19,\n        \"name\": \"It was popularised in the 1960s\",\n        \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n        \"status\": \"backlog\",\n        \"tags\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "approved tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{local}}api/tasks/approved/3",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks",
+						"approved",
+						"3"
+					]
+				},
+				"description": "Retorna todas as tasks aprovadas pelo cliente\n\n###### StatusCode: 200"
+			},
+			"response": [
+				{
+					"name": "200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}api/tasks/approved/3",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks",
+								"approved",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 21:26:23 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 21:26:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"2\": {\n        \"id\": 3,\n        \"name\": \"Derick Block DDS\",\n        \"description\": \"Aperiam aut natus aut aspernatur sunt perferendis et. Error commodi quis ipsa sunt. Hic aut sit quisquam eum totam est.\",\n        \"status\": \"approved\",\n        \"file_url\": \"https://via.placeholder.com/640x480.png/00dd66?text=eos\",\n        \"created_at\": \"2022-06-15T05:29:40.000000Z\",\n        \"updated_at\": \"2022-06-15T05:29:40.000000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "create task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"It was popularised in the 1960s\",\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n    \"status\": \"backlog\",\n    \"file_url\": \"https://www.lipsum.com/\"\n}"
+				},
+				"url": {
+					"raw": "{{local}}api/tasks",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Cadastra uma nova tarefa, com a garantia de que os dados estão corretos\n\n###### StatusCode: 201"
+			},
+			"response": [
+				{
+					"name": "201",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"It was popularised in the 1960s\",\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n    \"status\": \"backlog\",\n    \"file_url\": \"https://www.lipsum.com/\"\n}"
+						},
+						"url": {
+							"raw": "{{local}}api/tasks",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:21:06 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:21:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"It was popularised in the 1960s\",\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\n    \"status\": \"backlog\",\n    \"file_url\": \"https://www.lipsum.com/\",\n    \"updated_at\": \"2022-06-15T18:21:06.000000Z\",\n    \"created_at\": \"2022-06-15T18:21:06.000000Z\",\n    \"id\": 19\n}"
+				}
+			]
+		},
+		{
+			"name": "create tag",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tag_name\": \"It was popularised in the 1960s\",\n    \"task_id\": 13\n}"
+				},
+				"url": {
+					"raw": "{{local}}api/tasks/tag",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks",
+						"tag"
+					]
+				},
+				"description": "Cadastra uma nova tag para as tarefas existentes\n\n###### StatusCode: 204"
+			},
+			"response": [
+				{
+					"name": "204",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tag_name\": \"It was popularised in the 1960s\",\n    \"task_id\": 13\n}"
+						},
+						"url": {
+							"raw": "{{local}}api/tasks/tag",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks",
+								"tag"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:55:43 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:55:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "update task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"primeiro test 2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}api/tasks/13",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks",
+						"13"
+					]
+				},
+				"description": "Atualiza a tarefa, podendo ser editado todos os campos ou apenas um especifico\n\n###### StatusCode: 204"
+			},
+			"response": [
+				{
+					"name": "204",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"primeiro test 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}api/tasks/13",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks",
+								"13"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:20:35 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 18:20:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "update status progress task",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"in_progress\"\n}"
+				},
+				"url": {
+					"raw": "{{local}}api/tasks/16",
+					"host": [
+						"{{local}}api"
+					],
+					"path": [
+						"tasks",
+						"16"
+					]
+				},
+				"description": "Atualiza o status da tarefa, respeitando os estagios\n\nbacklog->in_progress->waiting_customer_approval->approved\n\n###### StatusCode: 204"
+			},
+			"response": [
+				{
+					"name": "204",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"in_progress\"\n}"
+						},
+						"url": {
+							"raw": "{{local}}api/tasks/16",
+							"host": [
+								"{{local}}api"
+							],
+							"path": [
+								"tasks",
+								"16"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 22:02:51 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Jun 2022 22:02:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.1.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "55"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

@@ -151,18 +151,4 @@ class TaskController extends Controller
 
         return $task;
     }
-
-    /**
-     * delete the specified task
-     *
-     * @param  mixed $id
-     * @return void
-     */
-    public function destroy($id)
-    {
-        $task = Task::findOrFail($id);
-        $task->delete();
-
-        return response()->json(null, 204);
-    }
 }
