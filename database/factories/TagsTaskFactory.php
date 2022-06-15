@@ -17,9 +17,8 @@ class TagsTaskFactory extends Factory
     public function definition()
     {
         return [
-            // use model TagsTask::class;
             'tag_name' => $this->faker->name,
-            'task_id' => $this->faker->numberBetween(0, 2)
+            'task_id' => $this->faker->numberBetween(0, 9)
         ];
     }
 }

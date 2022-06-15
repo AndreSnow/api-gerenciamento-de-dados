@@ -19,7 +19,9 @@ class TaskFactory extends Factory
         return [
             'name'          => $this->faker->name,
             'description'   => $this->faker->text,
-            'status'        => $this->faker->numberBetween(0, 2),
+            'status'        => $this->faker->randomElement([
+                'backlog', 'in_progress', 'waiting_customer_approval', 'approved'
+            ]),
             'file_url'      => $this->faker->imageUrl()
         ];
     }

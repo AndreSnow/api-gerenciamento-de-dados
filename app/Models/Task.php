@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Requests\TaskRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,4 @@ class Task extends Model
         'status',
         'file_url',
     ];
-    
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\TagsTask;
 use App\Models\Task;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

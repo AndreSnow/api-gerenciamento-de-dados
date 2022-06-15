@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->text('description')->nullable();
-            $table->integer('status')->default(false);
-            $table->string('file_url')->nullable();
+            $table->text('description');
+            $table->string('status');
+            $table->string('file_url');
             $table->timestamps();
         });
     }
