@@ -7,13 +7,12 @@ use App\Http\Requests\TaskRequest;
 use App\Http\Traits\StatusTrait;
 use App\Models\TagsTask;
 use App\Models\Task;
-use Illuminate\Support\Facades\Request;
 
 class TaskController extends Controller
 {
     use StatusTrait;
 
-    protected $entity;
+    protected $entity, $model;
 
     /**
      * TaskController constructor.
@@ -22,6 +21,7 @@ class TaskController extends Controller
     public function __construct()
     {
         $this->entity = app(Task::class);
+        $this->model = app(TagsTask::class);
     }
 
     /**
@@ -31,7 +31,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->entity::all([
+        $tasks = $this->entity::select([
             'id', 'name', 'description', 'status'
         ]);
 
@@ -42,7 +42,7 @@ class TaskController extends Controller
         }
 
         foreach ($tasks as $task) {
-            $task->tags = TagsTask::where('task_id', $task->id)
+            $task->tags = $this->model::where('task_id', $task->id)
                 ->get(['tag_name']);
         }
 
@@ -110,7 +110,7 @@ class TaskController extends Controller
                 'error' => 'Tarefa não encontrada'
             ], 404);
         }
-        $tag = TagsTask::create($data);
+        $tag = $this->model::create($data);
         if (!$tag) {
             return response()->json([
                 'error' => 'Erro ao criar a tag'
