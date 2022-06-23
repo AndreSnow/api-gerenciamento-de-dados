@@ -13,6 +13,17 @@ class TaskController extends Controller
 {
     use StatusTrait;
 
+    protected $entity;
+
+    /**
+     * TaskController constructor.
+     * @param Task $model
+     */
+    public function __construct()
+    {
+        $this->entity = app(Task::class);
+    }
+
     /**
      * Display a listing of tasks.
      *
@@ -20,7 +31,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all([
+        $tasks = $this->entity::all([
             'id', 'name', 'description', 'status'
         ]);
 
@@ -45,7 +56,7 @@ class TaskController extends Controller
      */
     public function listApproved($request)
     {
-        $tasks = Task::all()->where('id', $request)
+        $tasks = $this->entity::all()->where('id', $request)
             ->where('status', 'approved');
 
         if ($tasks->isEmpty()) {
@@ -73,7 +84,7 @@ class TaskController extends Controller
             $data['status'] = 'backlog';
         }
 
-        $task = Task::create($data);
+        $task = $this->entity::create($data);
 
         if (!$task) {
             return response()->json([
@@ -94,7 +105,7 @@ class TaskController extends Controller
             'tag_name', 'task_id'
         ]);
 
-        if (!Task::find($data['task_id'])) {
+        if (!$this->entity::find($data['task_id'])) {
             return response()->json([
                 'error' => 'Tarefa não encontrada'
             ], 404);
@@ -123,7 +134,7 @@ class TaskController extends Controller
             return $task;
         }
 
-        $task = Task::findOrFail($id);
+        $task = $this->entity::findOrFail($id);
         $data = $request->only([
             'name', 'description', 'status', 'file_url'
         ]);
