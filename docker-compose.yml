@@ -1,11 +1,37 @@
-version: 'v1.0.0'
+version: "3.7"
 
 services:
-  
-  app:
-    container_name: api-gdt
-    build:
-      context: .
-      dockerfile: Dockerfile
-      image: api-gdt
-      
+    # image project
+    app:
+        container_name: api-gdt
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: laravel9/api-gdt
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - laravel-9
+
+    # db mysql
+    mysql:
+        container_name: api-gdt-mysql
+        image: mysql:5.7.22
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3388:3306"
+        networks:
+            - laravel-9
+
+networks:
+    laravel-9:
+        driver: bridge
