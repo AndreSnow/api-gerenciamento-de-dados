@@ -143,7 +143,7 @@ git push origin my-feature
 <h2 align="center">Licença</h2>
 
 <p align="center">
-   Este repositório está sob licença MIT. Você pode acessar o arquivo <a href="https://github.com/AndreSnow/GDT/LICENSE">LICENSE</a> para mais detalhes. 😉
+   Este repositório está sob licença MIT. Você pode acessar o arquivo <a href="https://github.com/AndreSnow/GDT/blob/develop/LICENSE">LICENSE</a> para mais detalhes. 😉
 </p>
 
 ---
