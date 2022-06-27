@@ -38,7 +38,6 @@ Documentação no [postman](https://documenter.getpostman.com/view/14026033/UzBi
    
 - Cria tarefas e pode atribuir tags a essa tarefa
 
-
 ---
 
 <h2 align="center">Desafios e Aprendizados no Caminho</h2>
@@ -76,6 +75,22 @@ composer install
 
 ```sh
 php artisan serve
+```
+
+-   Rodar o app pelo docker:
+
+```sh
+sudo su
+```
+
+```sh
+docker-compose up -d --build
+```
+
+-   Parar o container
+
+```sh
+docker-compose stop
 ```
 
 -   Teste pelo postman usando a rota:
