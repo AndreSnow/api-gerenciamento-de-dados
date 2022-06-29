@@ -1,34 +1,24 @@
-FROM php:8.1.1-fpm
+FROM wyveo/nginx-php-fpm:latest
 
-# Arguments
-ARG user=andresnow
-ARG uid=1000
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+RUN apt-get upgrade -y && \
+    apt-get update -y --fix-missing && \
+    apt-get install -y apt-utils && \
+    apt-get install -y \
+    libmcrypt-dev \
+    zlib1g-dev \
+    libzip-dev \
+    curl gnupg && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+COPY . /var/www/html
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+WORKDIR /var/www/html
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN composer install
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+RUN chmod -R 775 storage/*
 
-# Set working directory
-WORKDIR /var/www
+RUN php artisan cache:clear
 
-USER $user
+EXPOSE 80
