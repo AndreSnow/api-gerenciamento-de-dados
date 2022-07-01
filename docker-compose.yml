@@ -1,26 +1,35 @@
 version: "3.8"
-
 services:
     api-gdt:
-        build: .
+        container_name: api-gdt
+        build:
+            context: "."
+        volumes:
+            - .:/var/www/html
         ports:
-            - 8080:83
+            - 83:80
         restart: unless-stopped
         tty: true
         dns:
             - 8.8.8.8
-        volumes:
-            - .:/var/www/html
-        networks:
-            - app-network
         environment:
-            DB_CONNECTION: "{{env ('DB_CONNECTION')}}"
-            DB_HOST: "{{ env('DB_HOST') }}"
-            DB_PORT: "{{env('DB_PORT')}}"
-            DB_DATABASE: "{{ env('DB_DATABASE') }}"
-            DB_USERNAME: "{{ env('DB_USERNAME') }}"
-            DB_PASSWORD: "{{ env('DB_PASSWORD') }}"
+            DB_CONNECTION: ${DB_CONNECTION}
+            DB_DATABASE: ${DB_DATABASE}
+            DB_PORT: ${DB_PORT}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_HOST: ${DB_HOST}
+            DB_PASSWORD: ${DB_PASSWORD}
 
+        networks:
+            - api-gdt-network
+    redis:
+        image: redis
+        command: redis-server --requirepass 1234
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+            - REDIS_PASSWORD=1234
+        networks:
+            - api-gdt-network
 networks:
-    app-network:
+    api-gdt-network:
         driver: bridge

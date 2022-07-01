@@ -1,5 +1,4 @@
-FROM wyveo/nginx-php-fpm:latest
-
+FROM php:8.1.0-apache
 
 RUN apt-get upgrade -y && \
     apt-get update -y --fix-missing && \
@@ -9,16 +8,30 @@ RUN apt-get upgrade -y && \
     zlib1g-dev \
     libzip-dev \
     curl gnupg && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    pecl install mcrypt-1.0.5 && \
+    docker-php-ext-enable mcrypt && \
+    docker-php-ext-install zip && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    docker-php-ext-install pdo pdo_mysql
 
-COPY . /var/www/html
+RUN pecl install redis && docker-php-ext-enable redis
+
+COPY . /var/www/html 
+
+COPY php.ini /usr/local/etc/php/php.ini
+COPY default.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
 
-RUN composer install
+RUN chmod -R 777 storage/* && \
+    chmod -R 777 ./script.sh
 
-RUN chmod -R 775 storage/*
+RUN a2enmod rewrite headers ssl && \
+    service apache2 restart
 
-RUN php artisan cache:clear
+# ENTRYPOINT ./script.sh ; /bin/bash
+
+RUN php artisan config:clear
 
 EXPOSE 80
+# EXPOSE 443
