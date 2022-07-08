@@ -31,7 +31,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->entity::select([
+        $tasks = $this->entity::all([
             'id', 'name', 'description', 'status'
         ]);
 
