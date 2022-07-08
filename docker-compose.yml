@@ -15,9 +15,9 @@ services:
         environment:
             DB_CONNECTION: ${DB_CONNECTION}
             DB_DATABASE: ${DB_DATABASE}
-            DB_PORT: ${DB_PORT}
+            DB_PORT: 3306
             DB_USERNAME: ${DB_USERNAME}
-            DB_HOST: ${DB_HOST}
+            DB_HOST: db-gdt
             DB_PASSWORD: ${DB_PASSWORD}
 
         networks:
@@ -28,6 +28,21 @@ services:
         environment:
             - ALLOW_EMPTY_PASSWORD=yes
             - REDIS_PASSWORD=1234
+        networks:
+            - api-gdt-network
+
+    db-gdt:
+        image: mysql:8.0
+        container_name: db-gdt
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports: 
+            - ${DB_PORT}:3306
         networks:
             - api-gdt-network
 networks:

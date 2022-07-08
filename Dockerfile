@@ -23,8 +23,10 @@ COPY default.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
 
-RUN chmod -R 777 storage/* && \
-    chmod -R 777 ./script.sh
+RUN chmod 777 storage/* && \
+    chmod 777 ./script.sh && \
+    chmod 777 database && \
+    chmod 777 database/database.sqlite
 
 RUN a2enmod rewrite headers ssl && \
     service apache2 restart
